@@ -45,14 +45,21 @@ class ResquestsHipsters:
 
         html = requests.get(url).text 
         return link_pod('a', html)
+    
+    def get_amount_page(self, req, url_home):
+        page_html = req.get('https://hipsters.tech/').text
+        number_page = lambda html: max([int(value) for value in re.findall('page/(.)', html) if value.isdigit()])
+        return number_page(page_html)
+
 
 r = ResquestsHipsters()
-dic_podcasts = r.mount_dictionary(r.get_podcasts_by_page(requests, 2    ))
+# dic_podcasts = r.mount_dictionary(r.get_podcasts_by_page(requests, 2    ))
 
-for podcast in dic_podcasts:
-    url = dic_podcasts.get(podcast).get('url-page') 
-    dic_podcasts[podcast]['src'] = r.get_src_podcast(url)
+# for podcast in dic_podcasts:
+#     url = dic_podcasts.get(podcast).get('url-page') 
+#     dic_podcasts[podcast]['src'] = r.get_src_podcast(url)
 
 
-with open('podcasts-page2.json', 'w') as fp:
-    json.dump(dic_podcasts, fp, indent=4)
+# with open('podcasts-page2.json', 'w') as fp:
+#     json.dump(dic_podcasts, fp, indent=4)
+print(r.get_amount_page(requests, 'https://hipsters.tech/'))
