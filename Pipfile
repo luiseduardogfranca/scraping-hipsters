@@ -5,7 +5,8 @@ name = "pypi"
 
 [packages]
 requests="*"
-firabase_admin="*"
+firebase-admin="*"
+google-cloud-firestore="*"
 
 [dev-packages]
 black="*"
